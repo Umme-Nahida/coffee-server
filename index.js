@@ -31,6 +31,15 @@ async function run() {
 
     app.get('/coffee/:id',async(req,res)=>{
       const id = req.params.id;
+      console.log(id)
+      const query = {_id:new ObjectId(id)}
+      const result = await coffeeCollection.deleteOne(query);
+      res.send(result)
+    }
+  )
+    app.get('/coffee/:id',async(req,res)=>{
+      const id = req.params.id;
+      console.log(id)
       const query = {_id:new ObjectId(id)}
       const result = await coffeeCollection.findOne(query);
       res.send(result)
@@ -46,7 +55,7 @@ async function run() {
     // create a new coffee
     app.post('/addcoffee',async(req,res)=>{
       const coffee = req.body;
-      console.log(coffee)
+      // console.log(coffee)
       const result = await coffeeCollection.insertOne(coffee);
       res.send(result);
     })
