@@ -28,7 +28,7 @@ async function run() {
     const database = client.db("insertDB");
     const coffeeCollection = database.collection("coffeeCollection")
   
-
+// deletee one coffee item
     app.get('/coffee/:id',async(req,res)=>{
       const id = req.params.id;
       console.log(id)
@@ -37,10 +37,21 @@ async function run() {
       res.send(result)
     }
   )
-    app.get('/coffee/:id',async(req,res)=>{
+  // get one item
+    app.get('/getCoffee/:id',async(req,res)=>{
       const id = req.params.id;
       console.log(id)
       const query = {_id:new ObjectId(id)}
+      const result = await coffeeCollection.findOne(query);
+      res.send(result)
+    }
+  )
+  // update one item
+    app.get('/updateCoffee/:id',async(req,res)=>{
+      const id = req.params.id;
+      console.log(id)
+      const query = {_id:new ObjectId(id)}
+
       const result = await coffeeCollection.findOne(query);
       res.send(result)
     }
